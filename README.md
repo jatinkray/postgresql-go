@@ -30,6 +30,11 @@ docker compose up
 The application will be running at http://localhost:8080
 
 #### Deploy application to kubernetes using helm
+
+Prequisites
+- ingress controller e.g. nginx ingress controller
+- cert manager 
+
 Before executing to kubernetes cluster . kindly review [charts/postgresgoapp/values.yaml](https://github.com/jatinkray/postgresql-go/blob/main/charts/postgresgoapp/values.yaml) for application config
 ```shell
 kubectl create namespace myapp
