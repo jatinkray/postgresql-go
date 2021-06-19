@@ -1,0 +1,74 @@
+# Default values for postgresgoapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: jatinkray/postgresgoapp
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+envConfig:
+  DBPORT: "5432"
+  DBHOST: "postgresgoapp-postgresql"
+  DBUSER: "postgres"
+  DBPASS: "dbpassword"
+  DBNAME: "peopledatabase"
+
+podAnnotations: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+  healthProbe: /server
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "false"
+  hosts:
+    - host: goapp.local
+      paths: 
+      - path: "/"
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+serviceAccount: {}
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# postgressql installation
+postgresql:
+  servicePort: 5432
+  postgresqlUsername: postgres
+  postgresqlPassword: dbpassword
+  postgresqlDatabase: peopledatabase
+  initdbScripts: 
+    init.sql: |-
+      CREATE TABLE peopleinfo (
+      birthday text,
+      names text,
+      occupation text
+      );
