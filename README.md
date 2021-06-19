@@ -30,12 +30,8 @@ docker compose up
 The application will be running at http://localhost:8080
 
 #### Deploy application to kubernetes using helm
-Before executing to kubernetes cluster . kindly review charts/postgresgoapp/values.yaml for application config
+Before executing to kubernetes cluster . kindly review [charts/postgresgoapp/values.yaml](https://github.com/jatinkray/postgresql-go/blob/main/charts/postgresgoapp/values.yaml) for application config
 ```shell
 kubectl create namespace myapp
 helm upgrade --install postgresgoapp charts/postgresgoapp --namespace myapp
 ```
-
-
-curl -L https://github.com/s-marchenko/postgresql-go/releases/download/v1.0.0/website_linux_amd64 --output postgresql
-chmod 775 postgresql
