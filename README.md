@@ -31,7 +31,7 @@ The application will be running at http://localhost:8080
 
 #### Deploy application to kubernetes using helm
 
-<b>Prequisites</b>
+<b>Prequisites installations</b>
 - ingress controller e.g. nginx ingress controller
 - cert manager 
 
