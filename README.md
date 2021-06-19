@@ -35,3 +35,5 @@ Before executing to kubernetes cluster . kindly review [charts/postgresgoapp/val
 kubectl create namespace myapp
 helm upgrade --install postgresgoapp charts/postgresgoapp --namespace myapp
 ```
+
+Note: if you are deploying the chart on minikube / docker-desktop. kindly update your /etc/hosts file for kubernetes ingress.
