@@ -37,3 +37,8 @@ helm upgrade --install postgresgoapp charts/postgresgoapp --namespace myapp
 ```
 
 Note: if you are deploying the chart on minikube / docker-desktop. kindly update your /etc/hosts file for kubernetes ingress.
+e.g. 
+```text
+127.0.0.1 localhost
+127.0.0.1 goapp.local
+```
