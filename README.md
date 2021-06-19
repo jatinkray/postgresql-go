@@ -20,11 +20,22 @@ export DBPASS= "Your DB Password"
 
 export DBNAME= "Your DB Name"
 
-#### Additional info
+#### Application Run local using docker
 
-You can check the server where the application runs on using http:/yourIP/server endpoint 
+```shell
+docker compose build 
+docker compose up
+```
 
-#### Download and install
+The application will be running at http://localhost:8080
+
+#### Deploy application to kubernetes using helm
+Before executing to kubernetes cluster . kindly review charts/postgresgoapp/values.yaml for application config
+```shell
+kubectl create namespace myapp
+helm upgrade --install postgresgoapp charts/postgresgoapp --namespace myapp
+```
+
 
 curl -L https://github.com/s-marchenko/postgresql-go/releases/download/v1.0.0/website_linux_amd64 --output postgresql
 chmod 775 postgresql

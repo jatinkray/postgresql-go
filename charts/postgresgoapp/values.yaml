@@ -21,21 +21,27 @@ podAnnotations: {}
 service:
   type: ClusterIP
   port: 8080
+  # healthcheck url of webapp 
   healthProbe: /server
 
+# expose service to outside cluster
 ingress:
   enabled: true
   annotations:
+    # using nginx ingress controller to expose service outside cluster
     kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "false"
+    # Below anotations used for enabling ssl using letsencrypt certificate issuer
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # cert-manager.io/issuer: "letsencrypt-staging"
   hosts:
     - host: goapp.local
       paths: 
       - path: "/"
   tls: []
-  #  - secretName: chart-example-tls
+  # To enable ssl for web service
+  #  - secretName: tls-secret
   #    hosts:
-  #      - chart-example.local
+  #      - goapp.local
 
 serviceAccount: {}
 resources:
@@ -49,9 +55,8 @@ resources:
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 1
+  maxReplicas: 2
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
